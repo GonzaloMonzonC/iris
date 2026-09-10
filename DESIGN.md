@@ -77,9 +77,14 @@ Frase: *"Astrid me dice lo que es cierto. Yo decido lo que merece la pena intent
 3. Iris ajusta, decide y ejecuta — visiblemente **usando** el consejo, no ignorándolo.
 4. Cierre: dos columnas — **hechos** (Astrid) y **decisiones creativas** (Iris), con las líneas de consejo visibles entre ambas.
 
-## 7. Preguntas abiertas para la revisión de Gonzalo
+## 7. Decisiones de Gonzalo (2026-09-10)
 
-1. **Alcance de "gestiona el ecosistema"**: ¿Iris coordina a los agentes actuales (angi/campo/gon/lisa/tom)? ¿Qué relación tiene con Lisa (hoy orquestadora/planificadora)? ¿Iris por encima, al lado, o Lisa se reconvierte?
-2. **Agencia concreta**: ¿primeras responsabilidades de gestión visibles (qué decide Iris en el día a día)?
-3. **Repo MIT**: ¿el contrato de Iris se publica como repo propio (como astrid) o el foco es interno primero?
-4. **Veredictos de Astrid**: ¿se anclan con HMAC (registro permanente de consejos) o quedan como metadato de conversación?
+1. **Jerarquía**: Iris **por encima** — coordina a angi/campo/gon/lisa/tom. **Lisa se reconvierte a su servicio** (planifica y ejecuta para Iris). Iris es la cabeza creativa y gestora; los workers responden a su coordinación.
+2. **Consejo**: Astrid es la consejera de evidencia de Iris (no su jefa): informa, no veta.
+3. *(Pendiente)*: repo MIT del contrato, veredictos anclados, primeras responsabilidades de gestión visibles.
+
+## 8. Preguntas abiertas restantes
+
+1. **Primeras responsabilidades de gestión visibles**: ¿qué decide Iris en el día a día (qué entrada del ecosistema gestiona primero: agenda social, tareas, prioridades)?
+2. **Repo MIT**: ¿el contrato de Iris se publica como repo propio (como astrid) o el foco es interno primero?
+3. **Veredictos de Astrid**: ¿se anclan con HMAC (registro permanente de consejos) o quedan como metadato de conversación?

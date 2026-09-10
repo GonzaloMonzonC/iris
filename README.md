@@ -1,30 +1,53 @@
 # Iris
 
-**Iris descompone la luz de la evidencia en un arcoíris de posibilidades — sin afirmar nunca que alguna de ellas sea real.**
+**Iris splits the light of evidence into a rainbow of possibilities — never claiming any of them is real.**
 
-Iris es el agente de **hipótesis** del equipo de investigación de Cadences Lab. Trabaja junto a [Astrid](https://github.com/GonzaloMonzonC/astrid):
+Iris is the **hypothesis agent** of the Cadences Lab research team. It works alongside [Astrid](https://github.com/GonzaloMonzonC/astrid):
 
-- **Astrid** encuentra, ancla y verifica los hechos (claims con source, CID, firma HMAC — *"evidencia registrada, o silencio"*).
-- **Iris** imagina lo que esos hechos podrían significar: hipótesis causales falsables, contrafactuales y experimentos capaces de matarlas — siempre etiquetadas `speculative: true`, nunca presentadas como claims.
+- **Astrid** finds, anchors and verifies facts (claims with source, CID, HMAC signature — *"evidence on record, or silence"*).
+- **Iris** imagines what those facts could mean: falsifiable causal hypotheses, counterfactuals, and experiments able to kill them — always labelled `speculative=1`, never presented as claims.
 
-> Una exige evidencia. La otra genera hipótesis que la evidencia pueda sostener o matar. Eso es un equipo de investigación.
+> One demands evidence. The other generates hypotheses that evidence can support or kill. That is a research team.
 
-## El contrato en una frase
+## The contract in one sentence
 
-Iris **no afirma**. Solo propone: *"No lo afirmo. Pero si fuera cierto, esto lo demostraría."*
+Iris **does not assert**. It only proposes: *"I'm not claiming it. But if it were true, this is how we'd show it."*
 
-Toda hipótesis de Iris es falsable por diseño (sin experimento que pueda matarla, es ruido), y toda promoción a evidencia la decide Astrid — nunca Iris.
+Every Iris hypothesis is falsifiable by design (no experiment able to kill it ⇒ noise), and every promotion to evidence is decided by Astrid — never by Iris.
 
-## Estado
+## Usage
 
-**Diseño en borrador** (`DESIGN.md`) — validado en brainstorming de equipo (2026-09-10), pendiente de revisión y de la primera versión del contrato técnico y la rutina M.
+```bash
+python tests/run_tests.py                        # full suite (exit 0 = green)
+python harness/iris_harness.py status            # personality status
+python harness/iris_harness.py seed              # seed ^PERSONALITY("iris")
+python harness/iris_harness.py new \
+    --text "If X, we would expect Y" \
+    --falsifier "measure Z within two weeks"     # create a hypothesis
+python harness/iris_harness.py list              # open hypotheses
+python harness/iris_harness.py verdict --id h_... --verdict contradicha --cid df1231b4
+python harness/iris_harness.py refuted           # refutation memory
+```
 
-## Repositorio
+## Layout
 
-- `DESIGN.md` — diseño y contrato `speculative` (borrador)
-- `docs/` — contrato técnico y protocolo con Astrid *(pendiente)*
-- `harness/` `template/` `src/` `tests/` — rutina M y verificación *(pendiente)*
+| Path | Content |
+|---|---|
+| `src/iris.m` | The M routine: personality + hypothesis contract (M-Light, no external deps) |
+| `personalities/iris.md` | Human-readable personality (canonical ASCII identity + fact sheet) |
+| `harness/iris_harness.py` | Connects Iris to a lumen MVM runtime (status/seed/new/list/verdict/refuted) |
+| `tests/run_tests.py` | Full suite against a real MVM (throwaway PDB, no external services) |
+| `docs/HYPOTHESIS_SCHEMA.md` | The `speculative` contract (schema v1) |
+| `DESIGN.md` | Design & role: free creative agent, ecosystem steward, with Astrid's evidence counsel |
 
-## Licencia
+## Requirements
+
+A lumen MVM runtime: clone [lumen-protocol](https://github.com/GonzaloMonzonC/lumen-protocol) next to this repo (recommended) or install `lumen-mcp` + point `LUMEN_MLIGHT_LIB` at your `lumen_mlight.dll`/`.so`.
+
+## Status
+
+**v0.1.0** — personality + hypothesis contract + green suite (15 checks). Iris also lives as an ecosystem agent (`mode: iris` in Poli, routing `^AGENTES("routing","iris")`).
+
+## License
 
 MIT — Copyright (c) 2026 Gonzalo Monzón · Cadences Lab

@@ -2,9 +2,32 @@
 
 Todos los cambios notables se documentan aquí. Formato basado en [Keep a Changelog](https://keepachangelog.com/), semver.
 
-## [Unreleased]
+## [0.1.0] — 2026-09-10
+
+### Added
+- `src/iris.m` — rutina M: personalidad (INIT/SEED/SETIF) + contrato de hipótesis:
+  `HYPO` (crea, falsificador obligatorio), `LIST`, `VERDICT` (abridora/plausible/contradicha),
+  `REFUTED` (memoria de refutación por zona), `COUNT`, `NOW`.
+- `personalities/iris.md` — personalidad legible: identidad canónica ASCII, ficha, 6 reglas críticas, 7 capacidades.
+- `harness/iris_harness.py` — conexión a un runtime lumen MVM: modos status/seed/new/list/verdict/refuted.
+- `tests/run_tests.py` — suite completa contra MVM real (15 checks): INIT idempotente, contrato
+  speculative, rechazos por falsabilidad, veredictos, memoria de refutación, invariante del
+  contrato, sync de identidad src ↔ personalities.
+- `docs/HYPOTHESIS_SCHEMA.md` — el contrato `speculative` (schema v1) y el ciclo de vida.
+- `SECURITY.md`, `CONTRIBUTING.md`, `README.es.md`, `.gitignore`.
+
+### Design
+- `DESIGN.md` v0.2 — pivote de Gonzalo (2026-09-10): Iris como agente libre creativa y
+  gestora del ecosistema, con Astrid de consejera de evidencia. Sustituye la v0.1
+  (generadora de hipótesis contenida, sin agencia).
+
+### Notes
+- El sync MVM→SQLite persiste SETs; los KILL de subárbol pueden no persistir ⇒ la
+  memoria de refutación se modela como zona (`zona=refuted`), no como borrado.
+- `HYPO` (no `NEW`): `NEW` es comando reservado de M y no puede usarse como etiqueta.
+
+## [Unreleased] — diseño inicial (v0.1.0-draft)
 
 ### Added (2026-09-10)
-- Diseño v0.1.0-draft (`DESIGN.md`): rol, no-rol, contrato `speculative`, protocolo con Astrid, límites anti-hype, personalidad, demo conjunta — resultado del brainstorming de equipo (smith: roberto/javier/vega) y elección de Gonzalo (Iris sobre Ariadna/Nyx).
-- Semilla del repo: `LICENSE` (MIT), `README.md`, `CHANGELOG.md`.
-- Decisión de arquitectura registrada: repo MIT propio, separación ontológica evidencia/hipótesis.
+- Diseño inicial + semilla del repo (LICENSE MIT, README, CHANGELOG).
+- Decisión de arquitectura registrada: separación ontológica evidencia/hipótesis.
