@@ -2,10 +2,11 @@
 
 **Iris splits the light of evidence into a rainbow of possibilities — never claiming any of them is real.**
 
-Iris is the **hypothesis agent** of the Cadences Lab research team. It works alongside [Astrid](https://github.com/GonzaloMonzonC/astrid):
+Iris is the **hypothesis agent** of the Cadences Lab research team. It works alongside [Astrid](https://github.com/GonzaloMonzonC/astrid) and [Elena](https://github.com/GonzaloMonzonC/elena), its sisters in the tríada:
 
 - **Astrid** finds, anchors and verifies facts (claims with source, CID, HMAC signature — *"evidence on record, or silence"*).
 - **Iris** imagines what those facts could mean: falsifiable causal hypotheses, counterfactuals, and experiments able to kill them — always labelled `speculative=1`, never presented as claims.
+- **Elena** closes the cycle: converts *sufficient truth* + *open options* into a signed decision card — *"So what do we do — now?"*.
 
 > One demands evidence. The other generates hypotheses that evidence can support or kill. That is a research team.
 
