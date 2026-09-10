@@ -45,6 +45,8 @@ python harness/iris_harness.py refuted           # refutation memory
 
 A lumen MVM runtime: clone [lumen-protocol](https://github.com/GonzaloMonzonC/lumen-protocol) next to this repo (recommended) or install `lumen-mcp` + point `LUMEN_MLIGHT_LIB` at your `lumen_mlight.dll`/`.so`.
 
+*It runs on a lumen MVM: a single ~4 MB native library (Rust to machine code) — no interpreter to install, no runtime to boot.*
+
 ## Status
 
 **v0.1.0** — personality + hypothesis contract + green suite (15 checks). Iris also lives as an ecosystem agent (`mode: iris` in Poli, routing `^AGENTES("routing","iris")`).
