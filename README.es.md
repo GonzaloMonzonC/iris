@@ -46,7 +46,7 @@ Un runtime lumen MVM: clona [lumen-protocol](https://github.com/GonzaloMonzonC/l
 
 ## Estado
 
-**v0.1.0** — personalidad + contrato de hipótesis + suite verde (15 checks). Iris vive además como agente del ecosistema (mode `iris` en Poli) con `#discord`/routing `^AGENTES("routing","iris")`.
+**v0.1.0** — personalidad + contrato de hipótesis + suite verde (15 checks). Iris vive además como agente del ecosistema (mode `iris` en Poli, routing `^AGENTES("routing","iris")`).
 
 ## Licencia
 

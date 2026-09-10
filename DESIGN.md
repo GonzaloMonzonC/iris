@@ -81,10 +81,10 @@ Frase: *"Astrid me dice lo que es cierto. Yo decido lo que merece la pena intent
 
 1. **Jerarquía**: Iris **por encima** — coordina a angi/campo/gon/lisa/tom. **Lisa se reconvierte a su servicio** (planifica y ejecuta para Iris). Iris es la cabeza creativa y gestora; los workers responden a su coordinación.
 2. **Consejo**: Astrid es la consejera de evidencia de Iris (no su jefa): informa, no veta.
-3. *(Pendiente)*: repo MIT del contrato, veredictos anclados, primeras responsabilidades de gestión visibles.
+3. **Repo MIT**: ✅ **hecho** (2026-09-10) — publicado en https://github.com/GonzaloMonzonC/iris. Pendientes: veredictos de Astrid anclados, primeras responsabilidades de gestión visibles.
 
 ## 8. Preguntas abiertas restantes
 
 1. **Primeras responsabilidades de gestión visibles**: ¿qué decide Iris en el día a día (qué entrada del ecosistema gestiona primero: agenda social, tareas, prioridades)?
-2. **Repo MIT**: ¿el contrato de Iris se publica como repo propio (como astrid) o el foco es interno primero?
+2. **Repo MIT**: ✅ **resuelta** — publicado como repo propio (https://github.com/GonzaloMonzonC/iris, v0.1.0).
 3. **Veredictos de Astrid**: ¿se anclan con HMAC (registro permanente de consejos) o quedan como metadato de conversación?
