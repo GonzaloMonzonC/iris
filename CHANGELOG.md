@@ -22,8 +22,11 @@ Todos los cambios notables se documentan aquí. Formato basado en [Keep a Change
   (generadora de hipótesis contenida, sin agencia).
 
 ### Notes
-- El sync MVM→SQLite persiste SETs; los KILL de subárbol pueden no persistir ⇒ la
-  memoria de refutación se modela como zona (`zona=refuted`), no como borrado.
+- La memoria de refutación se modela como zona (`zona=refuted`), no como borrado —
+  preferencia semántica (la historia se archiva). El bug de MVM que afectaba a los
+  KILL de subárbol contra SQLite se detectó durante el desarrollo de iris v0.1.0 y
+  se corrigió en [lumen-protocol](https://github.com/GonzaloMonzonC/lumen-protocol)
+  (commit `3528f30`, con tests de roundtrip string/número incluidos).
 - `HYPO` (no `NEW`): `NEW` es comando reservado de M y no puede usarse como etiqueta.
 
 ## [Unreleased] — diseño inicial (v0.1.0-draft)

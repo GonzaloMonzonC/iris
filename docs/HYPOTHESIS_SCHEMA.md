@@ -64,7 +64,7 @@ Toda hipótesis vive en el namespace `^HYPOTHESIS(<id>)` del MVM y tiene esta fo
 
 ## Nota de implementación (MVM)
 
-El sync del MVM a SQLite persiste **SETs**; los KILL de subárbol pueden no persistir. Por eso la memoria de refutación es una **zona** (campo `zona`), no un borrado. Esto es también semánticamente mejor: la historia no se borra, se archiva.
+La memoria de refutación es una **zona** (campo `zona=refuted`), no un borrado: la historia no se borra, se archiva. (Contexto: al implementar v0.1.0 se descubrió que el KILL de subárbol no persistía correctamente contra SQLite en el MVM — corregido en lumen-protocol `3528f30` con tests. El modelo de zonas se mantiene por preferencia semántica: archivar es mejor que borrar para una memoria de refutación.)
 
 ## Compatibilidad
 
