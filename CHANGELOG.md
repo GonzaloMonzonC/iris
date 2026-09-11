@@ -8,6 +8,7 @@ Todos los cambios notables se documentan aquí. Formato basado en [Keep a Change
 - 🌈 **Landing — [iris.cadences.app](https://iris.cadences.app)**: single-file (EN/ES),
   su personaje y *su realidad sobre LUMEN* (el patio de juegos: zonas, memoria de
   refutación, el digest de Astrid en su mesa), OG, favicon; cross-links de la tríada.
+- Landing: **firma visual v1** — arcos de arcoíris (marca de agua) + barra de espectro deslizante bajo el titular.
 
 ### Docs
 - README (+ ES): 🌐 landing link.
