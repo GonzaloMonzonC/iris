@@ -2,6 +2,16 @@
 
 Todos los cambios notables se documentan aquí. Formato basado en [Keep a Changelog](https://keepachangelog.com/), semver.
 
+## [0.1.2] — 2026-09-11
+
+### Added
+- 🌈 **Landing — [iris.cadences.app](https://iris.cadences.app)**: single-file (EN/ES),
+  su personaje y *su realidad sobre LUMEN* (el patio de juegos: zonas, memoria de
+  refutación, el digest de Astrid en su mesa), OG, favicon; cross-links de la tríada.
+
+### Docs
+- README (+ ES): 🌐 landing link.
+
 ## [0.1.1] — 2026-09-10
 
 ### Docs
