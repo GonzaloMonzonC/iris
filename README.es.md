@@ -2,6 +2,8 @@
 
 **Iris descompone la luz de la evidencia en un arcoíris de posibilidades — sin afirmar nunca que alguna de ellas sea real.**
 
+**🌐 [iris.cadences.app](https://iris.cadences.app)** · landing EN/ES
+
 Iris es el agente de **hipótesis** del equipo de investigación de Cadences Lab. Trabaja junto a [Astrid](https://github.com/GonzaloMonzonC/astrid) y [Elena](https://github.com/GonzaloMonzonC/elena), sus hermanas de la tríada:
 
 - **Astrid** encuentra, ancla y verifica los hechos (claims con source, CID, firma HMAC — *"evidencia registrada, o silencio"*).

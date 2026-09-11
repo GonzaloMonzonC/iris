@@ -2,6 +2,8 @@
 
 **Iris splits the light of evidence into a rainbow of possibilities — never claiming any of them is real.**
 
+**🌐 [iris.cadences.app](https://iris.cadences.app)** · landing EN/ES
+
 Iris is the **hypothesis agent** of the Cadences Lab research team. It works alongside [Astrid](https://github.com/GonzaloMonzonC/astrid) and [Elena](https://github.com/GonzaloMonzonC/elena), its sisters in the tríada:
 
 - **Astrid** finds, anchors and verifies facts (claims with source, CID, HMAC signature — *"evidence on record, or silence"*).
