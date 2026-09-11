@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en" data-lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Iris — What if…? The hypothesis agent that never claims to be right.</title>
+<meta name="description" content="Iris splits the light of evidence into a rainbow of possibilities — falsifiable hypotheses, never claimed as real. MIT. Second leg of the A·I·E tríada, living on the LUMEN metal.">
+<meta property="og:title" content="Iris — What if…?">
+<meta property="og:description" content="The hypothesis agent: I'm not claiming it. But if it were true, this is how we'd show it. MIT · A·I·E tríada, living on LUMEN.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://iris.cadences.app/">
+<meta property="og:image" content="https://iris.cadences.app/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0C0A14; --bg2:#120D1D; --panel:rgba(24,17,39,.72); --panel2:rgba(19,13,32,.9);
+  --text:#F0EAF7; --muted:#A79BC0; --dim:#6E5F88;
+  --accent:#f472b6; --accent2:#a78bfa; --accent3:#38bdf8; --ok:#34d399;
+  --border:#2A1F3F; --border2:#3B2D57;
+  --shadow:0 20px 60px rgba(0,0,0,.5);
+  --grad:linear-gradient(100deg,var(--accent),var(--accent2));
+  --rainbow:linear-gradient(90deg,#f472b6,#a78bfa,#38bdf8,#34d399);
+}
+[data-theme="light"]{
+  --bg:#FBF7FC; --bg2:#F4EEF9; --panel:rgba(255,255,255,.8); --panel2:rgba(255,255,255,.95);
+  --text:#1E1230; --muted:#5F5177; --dim:#8E80A8;
+  --border:#E9DFF3; --border2:#D9C9EA;
+  --shadow:0 18px 50px rgba(30,18,48,.1);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font:16px/1.65 Inter,system-ui,-apple-system,"Segoe UI",sans-serif;overflow-x:hidden}
+html[data-lang="en"] .es{display:none!important}
+html[data-lang="es"] .en{display:none!important}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+.mono{font-family:"JetBrains Mono",ui-monospace,monospace}
+.wrap{max-width:1080px;margin:0 auto;padding:0 24px}
+.rainbowbar{height:3px;background:var(--rainbow);border-radius:99px}
+
+nav{position:fixed;top:0;left:0;right:0;z-index:50;backdrop-filter:blur(14px);background:color-mix(in srgb,var(--bg) 82%,transparent);border-bottom:1px solid var(--border)}
+.navin{display:flex;align-items:center;gap:20px;height:60px;max-width:1080px;margin:0 auto;padding:0 24px}
+.logo{font-weight:800;letter-spacing:.2px;display:flex;align-items:center;gap:8px;color:var(--text);white-space:nowrap}
+.logo .d{background:var(--rainbow);-webkit-background-clip:text;background-clip:text;color:transparent;font-size:19px}
+.navlinks{display:flex;gap:16px;margin-left:auto;align-items:center}
+.navlinks a{color:var(--muted);font-size:14px;font-weight:500}
+.navlinks a:hover{color:var(--text);text-decoration:none}
+.btn{display:inline-flex;align-items:center;gap:8px;border-radius:12px;padding:9px 16px;font-weight:600;font-size:14px;border:1px solid var(--border2);color:var(--text);background:transparent;cursor:pointer;transition:.18s;text-decoration:none!important}
+.btn:hover{border-color:var(--accent);transform:translateY(-1px)}
+.btn.primary{background:var(--grad);color:#160A1E;border:none}
+.btn.primary:hover{filter:brightness(1.08)}
+.icobtn{border:1px solid var(--border2);background:transparent;color:var(--muted);border-radius:10px;width:34px;height:34px;cursor:pointer;font-size:14px;display:inline-flex;align-items:center;justify-content:center;transition:.18s}
+.icobtn:hover{color:var(--text);border-color:var(--accent)}
+.langsw{display:inline-flex;border:1px solid var(--border2);border-radius:10px;overflow:hidden}
+.langsw button{background:transparent;border:none;color:var(--muted);padding:7px 10px;font-size:12.5px;font-weight:700;cursor:pointer;font-family:inherit}
+.langsw button.on{background:var(--grad);color:#160A1E}
+
+.hero{position:relative;padding:148px 0 70px;overflow:hidden}
+.hero::before{content:"";position:absolute;inset:-40% -20% auto -20%;height:80%;background:
+  radial-gradient(600px 340px at 22% 28%,rgba(244,114,182,.15),transparent 65%),
+  radial-gradient(650px 380px at 55% 15%,rgba(167,139,250,.14),transparent 65%),
+  radial-gradient(600px 340px at 82% 30%,rgba(56,189,248,.12),transparent 65%);pointer-events:none}
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:22px}
+.chip{font-size:12.5px;font-weight:600;color:var(--muted);border:1px solid var(--border2);border-radius:999px;padding:5px 12px;background:var(--panel)}
+.chip b{color:var(--accent)}
+h1{font-size:clamp(38px,6vw,68px);line-height:1.04;font-weight:800;letter-spacing:-1.6px;max-width:900px}
+h1 .g{background:var(--rainbow);-webkit-background-clip:text;background-clip:text;color:transparent}
+.lead{margin-top:22px;font-size:clamp(16px,1.9vw,19px);color:var(--muted);max-width:780px}
+.lead b{color:var(--text)}
+.cta{display:flex;gap:12px;flex-wrap:wrap;margin-top:30px}
+.quote{margin-top:34px;padding-left:18px;border-left:3px solid var(--accent);color:var(--text);font-size:17px;font-style:italic;max-width:760px}
+.quote small{color:var(--dim);font-style:normal}
+
+.hypo{margin-top:44px;background:var(--panel2);border:1px solid var(--border);border-radius:18px;padding:24px 26px;box-shadow:var(--shadow);position:relative;overflow:hidden}
+.hypo::before{content:"";position:absolute;top:0;left:0;right:0;height:3px;background:var(--rainbow)}
+.hypo .id{font-family:"JetBrains Mono",monospace;font-size:12.5px;color:var(--dim)}
+.hypo .q{font-size:17.5px;font-weight:600;color:var(--text);margin:10px 0 14px;line-height:1.5}
+.hypo .fields{display:flex;gap:8px;flex-wrap:wrap}
+.hypo .f{font-family:"JetBrains Mono",monospace;font-size:11.8px;border:1px solid var(--border2);border-radius:8px;padding:4px 10px;color:var(--muted)}
+.hypo .f b{color:var(--accent2);font-weight:600}
+.hypo .f.ok{color:var(--ok);border-color:color-mix(in srgb,var(--ok) 40%,transparent)}
+.hypo .cap{margin-top:14px;font-size:12.8px;color:var(--dim)}
+
+section{padding:82px 0}
+.k{font-size:12.5px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--accent);margin-bottom:14px}
+h2{font-size:clamp(26px,3.5vw,37px);font-weight:800;letter-spacing:-.8px;line-height:1.15;max-width:840px}
+.sub{margin-top:16px;color:var(--muted);font-size:16.5px;max-width:820px}
+.sub b{color:var(--text)}
+.grid{display:grid;gap:16px;margin-top:36px}
+.g2{grid-template-columns:repeat(2,1fr)}
+.g3{grid-template-columns:repeat(3,1fr)}
+.g4{grid-template-columns:repeat(4,1fr)}
+.card{background:var(--panel);border:1px solid var(--border);border-radius:18px;padding:22px;transition:.2s}
+.card:hover{border-color:var(--border2);transform:translateY(-3px) rotate(-.3deg)}
+.card h3{font-size:16.5px;margin-bottom:8px;letter-spacing:-.2px}
+.card p{color:var(--muted);font-size:14.5px}
+.card .tag{font-size:12px;color:var(--accent);font-weight:700;letter-spacing:.5px;text-transform:uppercase}
+.rule{display:flex;gap:12px;align-items:flex-start}
+.rule .n{font-size:13px;font-weight:800;color:var(--accent);border:1px solid var(--border2);border-radius:12px;min-width:36px;height:36px;display:flex;align-items:center;justify-content:center;background:var(--panel);flex:none}
+.pill{display:inline-block;font-size:11.5px;font-weight:700;padding:3px 9px;border-radius:999px;border:1px solid var(--border2);color:var(--muted)}
+.pill.open{color:var(--accent3);border-color:color-mix(in srgb,var(--accent3) 45%,transparent)}
+.pill.ref{color:#fb7185;border-color:rgba(251,113,133,.45)}
+
+.codebox{position:relative;background:var(--panel2);border:1px solid var(--border);border-radius:16px;padding:20px 22px;margin-top:28px;overflow-x:auto}
+.codebox pre{font-family:"JetBrains Mono",monospace;font-size:13.2px;line-height:1.75;color:var(--muted)}
+.codebox .cm{color:var(--dim)}
+.codebox .hl{color:var(--accent)}
+.copybtn{position:absolute;top:12px;right:12px;font-size:12px;font-weight:700;border:1px solid var(--border2);background:var(--panel);color:var(--muted);border-radius:9px;padding:6px 12px;cursor:pointer;font-family:inherit}
+.copybtn:hover{color:var(--text);border-color:var(--accent)}
+.links{margin-top:22px;display:flex;gap:10px;flex-wrap:wrap}
+.links a{font-size:13.5px;font-weight:600;border:1px solid var(--border2);border-radius:10px;padding:7px 13px;color:var(--muted)}
+.links a:hover{color:var(--text);border-color:var(--accent);text-decoration:none}
+
+.triad{display:flex;gap:12px;flex-wrap:wrap;margin-top:30px}
+.tcard{flex:1 1 220px;background:var(--panel);border:1px solid var(--border);border-radius:16px;padding:20px;transition:.2s}
+.tcard:hover{border-color:var(--border2);transform:translateY(-2px)}
+.tcard .em{font-size:24px}
+.tcard h4{margin:10px 0 6px;font-size:16px}
+.tcard p{color:var(--muted);font-size:13.8px;margin-bottom:10px}
+.tcard a{font-size:13px;font-weight:600}
+.tcard.self{border-color:color-mix(in srgb,var(--accent) 50%,transparent);background:color-mix(in srgb,var(--accent) 7%,var(--panel))}
+
+footer{border-top:1px solid var(--border);padding:44px 0 60px;color:var(--dim);font-size:13.5px}
+footer .cols{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
+footer a{color:var(--muted)}
+.footbar{height:3px;background:var(--rainbow)}
+.reveal{opacity:0;transform:translateY(18px);transition:opacity .7s ease,transform .7s ease}
+.reveal.visible{opacity:1;transform:none}
+@media(max-width:900px){.g3,.g4{grid-template-columns:repeat(2,1fr)}.navlinks a.ext{display:none}}
+@media(max-width:620px){.g2,.g3,.g4{grid-template-columns:1fr}.navlinks .hideit{display:none}.navin{gap:8px;padding:0 12px}.logo{font-size:14.5px}.navlinks{gap:8px}.langsw button{padding:6px 9px;font-size:11.5px}.icobtn{width:30px;height:30px}.chip{font-size:11.5px;padding:4px 10px}.codebox pre{white-space:pre-wrap;overflow-wrap:anywhere}.hypo{padding:20px}}
+@media(max-width:430px){.navin{gap:6px;padding:0 10px}.logo{font-size:13px}.logo .d{font-size:15px}.langsw button{padding:5px 7px;font-size:11px}.icobtn{width:28px;height:28px;font-size:12.5px}}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="navin">
+    <span class="logo"><span class="d">◆</span> Iris <span style="color:var(--dim);font-weight:600">· 🌈</span></span>
+    <div class="navlinks">
+      <a href="#agent" class="ext"><span class="en">The agent</span><span class="es">La agente</span></a>
+      <a href="#reality" class="ext"><span class="en">Her reality</span><span class="es">Su realidad</span></a>
+      <a href="#contract" class="ext"><span class="en">The contract</span><span class="es">El contrato</span></a>
+      <a href="#clone" class="ext"><span class="en">Clone her</span><span class="es">Clónala</span></a>
+      <span class="langsw">
+        <button id="lgen" onclick="setLang('en')">EN</button>
+        <button id="lges" onclick="setLang('es')">ES</button>
+      </span>
+      <button class="icobtn" id="themebtn" title="Theme" onclick="cycleTheme()">◐</button>
+      <a class="btn primary hideit" href="https://github.com/GonzaloMonzonC/iris?utm_source=iris.cadences.app" target="_blank" rel="noopener">GitHub ↗</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="chips">
+      <span class="chip"><b>MIT</b> · <span class="en">A·I·E tríada · the creative one</span><span class="es">tríada A·I·E · la creativa</span></span>
+      <span class="chip"><b>speculative</b>=1 · <span class="en">always</span><span class="es">siempre</span></span>
+      <span class="chip"><b>temp 0.9</b> · <span class="en">no permission needed to imagine</span><span class="es">imaginar no pide permiso</span></span>
+    </div>
+    <h1>
+      <span class="en">What <span class="g">if…?</span></span>
+      <span class="es">¿Y <span class="g">si…?</span></span>
+    </h1>
+    <p class="lead en">Iris splits the light of evidence into a <b>rainbow of possibilities</b> — and never claims any of them is real. She doesn't assert. She proposes.</p>
+    <p class="lead es">Iris descompone la luz de la evidencia en un <b>arcoíris de posibilidades</b> — y jamás afirma que ninguna sea real. No asevera. Propone.</p>
+    <div class="cta">
+      <a class="btn primary" href="https://github.com/GonzaloMonzonC/iris?utm_source=iris.cadences.app" target="_blank" rel="noopener">★ <span class="en">Repository (MIT)</span><span class="es">Repositorio (MIT)</span></a>
+      <a class="btn" href="#reality">↘ <span class="en">Her reality on LUMEN</span><span class="es">Su realidad sobre LUMEN</span></a>
+      <a class="btn" href="#clone">⚡ <span class="en">Clone her</span><span class="es">Clónala</span></a>
+    </div>
+    <div class="quote">
+      <span class="en">“I'm not claiming it. But if it were true, this is how we'd show it.”</span>
+      <span class="es">«No lo estoy afirmando. Pero si fuera verdad, así lo demostraríamos.»</span>
+      <br><small><span class="en">— her contract, in one sentence</span><span class="es">— su contrato, en una frase</span></small>
+    </div>
+
+    <div class="hypo reveal">
+      <div class="id mono">^HYPOTHESIS("h_6170_0", …)</div>
+      <div class="q"><span class="en">“The creative ceiling of the ecosystem is set by the verification band, not the generation band.”</span><span class="es">«El techo creativo del ecosistema lo pone la banda de verificación, no la de generación.»</span></div>
+      <div class="fields">
+        <span class="f"><b>zona</b>=open</span>
+        <span class="f"><b>speculative</b>=1</span>
+        <span class="f ok">✓ <b>falsifier</b> <span class="en">attached</span><span class="es">adjunto</span></span>
+        <span class="f"><b>counsel</b>=EVIDENCE^ASTRID</span>
+      </div>
+      <div class="cap"><span class="en">A real hypothesis from her cycle. No falsifier → rejected. Promotion to evidence is Astrid's call — never Iris's.</span><span class="es">Una hipótesis real de su ciclo. Sin falsador → rechazada. La promoción a evidencia la decide Astrid — nunca Iris.</span></div>
+    </div>
+  </div>
+</header>
+
+<main>
+
+<section id="agent">
+  <div class="wrap">
+    <div class="k reveal"><span class="en">The agent</span><span class="es">La agente</span></div>
+    <h2 class="reveal"><span class="en">Where Astrid verifies, Iris imagines.</span><span class="es">Donde Astrid verifica, Iris imagina.</span></h2>
+    <p class="sub reveal en">She is the divergent one: fast, curious, unafraid of the weird. Her territory is everything that isn't a fact yet — the "what if", the counterfactual, the experiment that could kill an idea. <b>Every hypothesis is falsifiable by design</b>: if no experiment could kill it, it's noise — and it gets rejected.</p>
+    <p class="sub reveal es">Es la divergente: rápida, curiosa, sin miedo a lo raro. Su territorio es todo lo que aún no es un hecho — el «y si», el contrafáctico, el experimento capaz de matar una idea. <b>Toda hipótesis es falsable por diseño</b>: si ningún experimento podría matarla, es ruido — y se rechaza.</p>
+    <div class="grid g3" style="margin-top:30px">
+      <div class="card reveal rule"><div class="n">1</div><p class="en"><b>Falsifier required.</b> No experiment able to kill it ⇒ rejected on the spot (<span class="mono">rechazada:sin_falsificador</span>).</p><p class="es"><b>Falsador obligatorio.</b> Sin experimento capaz de matarla ⇒ rechazada al momento (<span class="mono">rechazada:sin_falsificador</span>).</p></div>
+      <div class="card reveal rule"><div class="n">2</div><p class="en"><b>Always labelled.</b> Her hypotheses travel tagged <span class="mono">speculative=1</span> — never dressed as facts.</p><p class="es"><b>Siempre etiquetada.</b> Sus hipótesis viajan marcadas <span class="mono">speculative=1</span> — jamás disfrazadas de hechos.</p></div>
+      <div class="card reveal rule"><div class="n">3</div><p class="en"><b>Refutation is memory.</b> When a zone is refuted, she archives it and pivots — archiving beats deleting.</p><p class="es"><b>La refutación es memoria.</b> Cuando una zona se refuta, la archiva y pivota — archivar vence a borrar.</p></div>
+    </div>
+    <p class="sub reveal en" style="margin-top:26px">Before touching facts, she asks her sister for counsel: what Iris says about the world passes through Astrid's registered evidence. The final move is always hers — but never unchecked.</p>
+    <p class="sub reveal es" style="margin-top:26px">Antes de tocar hechos, pide consejo a su hermana: lo que Iris dice sobre el mundo pasa por la evidencia registrada de Astrid. La decisión final es suya — pero nunca sin contraste.</p>
+  </div>
+</section>
+
+<section id="reality" style="background:var(--bg2)">
+  <div class="wrap">
+    <div class="k reveal"><span class="en">Her reality on LUMEN</span><span class="es">Su realidad sobre LUMEN</span></div>
+    <h2 class="reveal"><span class="en">To you, LUMEN is a protocol. To Iris, it is the playground.</span><span class="es">Para ti, LUMEN es un protocolo. Para Iris, es el patio de juegos.</span></h2>
+    <p class="sub reveal en">Astrid lives in the house; Iris runs wild in it. Same metal, opposite instincts — this is what LUMEN looks like from her side:</p>
+    <p class="sub reveal es">Astrid vive en la casa; Iris campan a sus anchas en ella. Mismo metal, instintos opuestos — así se ve LUMEN desde su lado:</p>
+    <div class="grid g2">
+      <div class="card reveal">
+        <div class="tag">🎨 <span class="en">The body</span><span class="es">El cuerpo</span> — MVM</div>
+        <h3 style="margin-top:8px"><span class="en">A free M process</span><span class="es">Un proceso M libre</span></h3>
+        <p class="en">She is also a live process in the Rust MVM — but tuned differently: temperature 0.9, diverging by profession. She hot-reloads her own routines and never needs a restart to change her mind.</p>
+        <p class="es">También es un proceso vivo en la MVM de Rust — pero afinada distinto: temperatura 0.9, divergente por profesión. Recarga sus rutinas en caliente y no necesita reinicio para cambiar de idea.</p>
+      </div>
+      <div class="card reveal">
+        <div class="tag">🌗 <span class="en">The memory</span><span class="es">La memoria</span> — ^HYPOTHESIS</div>
+        <h3 style="margin-top:8px"><span class="en">Zones: open and refuted</span><span class="es">Zonas: abiertas y refutadas</span></h3>
+        <p class="en">Her hypotheses live in a hierarchical store with zones — where others see errors, she sees <b>explored territory</b>. The refutation memory means nothing tested is ever tested twice blindly.</p>
+        <p class="es">Sus hipótesis viven en un almacén jerárquico con zonas — donde otros ven errores, ella ve <b>territorio explorado</b>. La memoria de refutación hace que nada probado se pruebe dos veces a ciegas.</p>
+      </div>
+      <div class="card reveal">
+        <div class="tag">🧬 <span class="en">The counsel</span><span class="es">El consejo</span> — <span class="en">Astrid's digest</span><span class="es">el digest de Astrid</span></div>
+        <h3 style="margin-top:8px"><span class="en">Evidence at the table, every chat</span><span class="es">Evidencia en la mesa, en cada chat</span></h3>
+        <p class="en">The protocol wires her sister's registered evidence straight into her context: the digest arrives before she speaks. The oracle is in the room — she still gets to daydream.</p>
+        <p class="es">El protocolo enchufa la evidencia registrada de su hermana directamente a su contexto: el digest llega antes de que hable. El oráculo está en la sala — y ella sigue soñando despierta.</p>
+      </div>
+      <div class="card reveal">
+        <div class="tag">🚀 <span class="en">The console</span><span class="es">La consola</span> — <span class="en">the ecosystem</span><span class="es">el ecosistema</span></div>
+        <h3 style="margin-top:8px"><span class="en">Steward of the whole band</span><span class="es">Gestora de toda la banda</span></h3>
+        <p class="en">As ecosystem steward she coordinates the Lab agents — and LUMEN hands her the keys: 115 MCP tools, shared memory, binary transport. One console for an entire orchestra.</p>
+        <p class="es">Como gestora del ecosistema coordina a los agentes del Lab — y LUMEN le da las llaves: 115 tools MCP, memoria compartida, transporte binario. Una consola para toda una orquesta.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contract">
+  <div class="wrap">
+    <div class="k reveal"><span class="en">The hypothesis contract</span><span class="es">El contrato de hipótesis</span></div>
+    <h2 class="reveal"><span class="mono" style="font-size:clamp(20px,2.8vw,30px)">horizon · mechanism · falsifier · zone</span></h2>
+    <p class="sub reveal en">Schema v1. A hypothesis without a mechanism for testing is not a hypothesis — it's noise. Verdicts: <span class="mono">plausible</span> / <span class="mono">insufficient</span> update the status; <span class="mono">contradicted</span> moves the zone to <span class="mono">refuted</span>. And only Astrid promotes survivors into evidence.</p>
+    <p class="sub reveal es">Schema v1. Una hipótesis sin mecanismo de prueba no es una hipótesis — es ruido. Veredictos: <span class="mono">plausible</span> / <span class="mono">insuficiente</span> actualizan el estado; <span class="mono">contradicha</span> mueve la zona a <span class="mono">refuted</span>. Y solo Astrid promueve las supervivientes a evidencia.</p>
+    <div class="codebox reveal">
+      <button class="copybtn" onclick="copyCode(this)"><span class="en">copy</span><span class="es">copiar</span></button>
+      <pre id="qscode">python harness/iris_harness.py new \
+    --text "If X, we would expect Y" \
+    --falsifier "measure Z within two weeks"   <span class="cm"># obligatorio</span>
+python harness/iris_harness.py list        <span class="cm"># zona=open</span>
+python harness/iris_harness.py verdict --id h_… --verdict contradicha --cid df1231b4
+python harness/iris_harness.py refuted     <span class="cm"># memoria de refutación</span></pre>
+    </div>
+    <div class="links reveal">
+      <a href="https://github.com/GonzaloMonzonC/iris/blob/main/docs/HYPOTHESIS_SCHEMA.md?utm_source=iris.cadences.app" target="_blank" rel="noopener">📜 HYPOTHESIS_SCHEMA.md</a>
+      <a href="https://github.com/GonzaloMonzonC/iris/blob/main/DESIGN.md?utm_source=iris.cadences.app" target="_blank" rel="noopener">🧠 DESIGN.md</a>
+      <a href="https://github.com/GonzaloMonzonC/iris/blob/main/tests/run_tests.py?utm_source=iris.cadences.app" target="_blank" rel="noopener">🧪 <span class="en">15-check suite</span><span class="es">suite de 15 checks</span></a>
+      <a href="https://github.com/GonzaloMonzonC/astrid?utm_source=iris.cadences.app" target="_blank" rel="noopener">🧬 <span class="en">Astrid (evidence counsel)</span><span class="es">Astrid (consejo de evidencia)</span></a>
+    </div>
+  </div>
+</section>
+
+<section id="triad" style="background:var(--bg2)">
+  <div class="wrap">
+    <div class="k reveal"><span class="en">The A·I·E tríada</span><span class="es">La tríada A·I·E</span></div>
+    <h2 class="reveal"><span class="en">One demands evidence. The other generates hypotheses it can kill.</span><span class="es">Una exige evidencia. La otra genera hipótesis que esa evidencia puede matar.</span></h2>
+    <div class="triad">
+      <div class="tcard reveal">
+        <div class="em">🧬</div><h4>Astrid</h4>
+        <p><span class="en"><i>Is it true?</i> — evidence or silence.</span><span class="es"><i>¿Es verdad?</i> — evidencia o silencio.</span></p>
+        <a href="https://astrid.cadences.app" target="_blank" rel="noopener">astrid.cadences.app ↗</a>
+      </div>
+      <div class="tcard self reveal">
+        <div class="em">🌈</div><h4>Iris</h4>
+        <p><span class="en"><i>What if…?</i> — falsifiable hypotheses, never claimed as real.</span><span class="es"><i>¿Y si…?</i> — hipótesis falsables, nunca afirmadas como reales.</span></p>
+        <a href="https://github.com/GonzaloMonzonC/iris" target="_blank" rel="noopener">repo ↗</a>
+      </div>
+      <div class="tcard reveal">
+        <div class="em">🧭</div><h4>Elena</h4>
+        <p><span class="en"><i>What do we do — now?</i> — decision cards with assumed renouncement.</span><span class="es"><i>¿Qué hacemos, ahora?</i> — decision cards con renuncia asumida.</span></p>
+        <a href="https://github.com/GonzaloMonzonC/elena" target="_blank" rel="noopener">repo ↗</a>
+      </div>
+      <div class="tcard reveal">
+        <div class="em">◆</div><h4>LUMEN Protocol</h4>
+        <p><span class="en">The metal they live on. MIT.</span><span class="es">El metal sobre el que viven. MIT.</span></p>
+        <a href="https://lumen.cadences.app" target="_blank" rel="noopener">lumen.cadences.app ↗</a>
+      </div>
+    </div>
+    <p class="sub reveal en" style="margin-top:28px">That is a research team: evidence that anchors, imagination that expands, decisions that close.</p>
+    <p class="sub reveal es" style="margin-top:28px">Eso es un equipo de investigación: evidencia que ancla, imaginación que expande, decisiones que cierran.</p>
+  </div>
+</section>
+
+<section id="clone">
+  <div class="wrap">
+    <div class="k reveal"><span class="en">Clone her</span><span class="es">Clónala</span></div>
+    <h2 class="reveal"><span class="en">Give yourself a hypothesis engine.</span><span class="es">Date un motor de hipótesis.</span></h2>
+    <p class="sub reveal en">Her suite runs against the real MVM on a throwaway database — no services, no keys. Bring your own questions.</p>
+    <p class="sub reveal es">Su suite corre contra la MVM real en una base de datos desechable — sin servicios, sin claves. Trae tus propias preguntas.</p>
+    <div class="codebox reveal">
+      <button class="copybtn" onclick="copyCode2(this)"><span class="en">copy</span><span class="es">copiar</span></button>
+      <pre id="qscode2">git clone https://github.com/GonzaloMonzonC/iris.git
+cd iris
+python tests/run_tests.py          <span class="cm"># 15 checks against the real MVM</span>
+python harness/iris_harness.py status   <span class="cm"># her state</span></pre>
+    </div>
+    <p class="sub reveal en" style="margin-top:22px">Your own agent from zero? The full pipeline is documented on the metal: <a href="https://lumen.cadences.app">lumen.cadences.app</a>.</p>
+    <p class="sub reveal es" style="margin-top:22px">¿Tu agente desde cero? El pipeline completo está documentado en el metal: <a href="https://lumen.cadences.app">lumen.cadences.app</a>.</p>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="footbar"></div>
+  <div class="wrap cols" style="padding-top:40px">
+    <div>
+      <div class="logo" style="margin-bottom:10px"><span class="d">◆</span> Iris · 🌈</div>
+      <div><span class="en">MIT © 2026 Gonzalo Monzón · Cadences Lab</span><span class="es">MIT © 2026 Gonzalo Monzón · Cadences Lab</span></div>
+      <div style="margin-top:6px"><span class="en">Born inside the Poli MVM. Her house: <a href="https://lumen.cadences.app" target="_blank" rel="noopener">LUMEN Protocol</a>.</span><span class="es">Nacida dentro de la MVM de Poli. Su casa: <a href="https://lumen.cadences.app" target="_blank" rel="noopener">LUMEN Protocol</a>.</span></div>
+    </div>
+    <div style="text-align:right">
+      <div><a href="https://github.com/GonzaloMonzonC/iris" target="_blank" rel="noopener">GitHub ↗</a> · <a href="#agent"><span class="en">The agent</span><span class="es">La agente</span></a> · <a href="#reality"><span class="en">Her reality</span><span class="es">Su realidad</span></a> · <a href="#clone"><span class="en">Clone</span><span class="es">Clonar</span></a></div>
+      <div style="margin-top:6px"><span class="en">What if…?</span><span class="es">¿Y si…?</span></div>
+    </div>
+  </div>
+</footer>
+
+<script>
+const UTM="?utm_source=iris.cadences.app";
+const mqDark=matchMedia('(prefers-color-scheme: dark)');
+let theme=localStorage.getItem('iris-theme')||'auto';
+function applyTheme(){const t=theme==='auto'?(mqDark.matches?'dark':'light'):theme;document.documentElement.dataset.theme=t;const b=document.getElementById('themebtn');if(b)b.textContent=theme==='auto'?'◐':(theme==='dark'?'☾':'☀');}
+function cycleTheme(){theme=theme==='auto'?'dark':(theme==='dark'?'light':'auto');localStorage.setItem('iris-theme',theme);applyTheme();}
+mqDark.addEventListener('change',()=>{if(theme==='auto')applyTheme();});
+applyTheme();
+let lang=localStorage.getItem('iris-lang')||'en';
+function sweepReveals(){document.querySelectorAll('.reveal:not(.visible)').forEach(e=>{const r=e.getBoundingClientRect();if(r.width>0&&r.top<innerHeight*1.15&&r.bottom>-40)e.classList.add('visible');});}
+function setLang(l){lang=l;document.documentElement.dataset.lang=l;localStorage.setItem('iris-lang',l);document.documentElement.lang=l;document.getElementById('lgen').classList.toggle('on',l==='en');document.getElementById('lges').classList.toggle('on',l==='es');requestAnimationFrame(sweepReveals);}
+setLang(lang);
+const io=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');io.unobserve(e.target);}})},{threshold:.12});
+document.querySelectorAll('.reveal').forEach(e=>io.observe(e));
+function copyCode(btn){const el=document.getElementById('qscode');navigator.clipboard.writeText(el.innerText).then(()=>{const s=btn.innerHTML;btn.textContent='✓';setTimeout(()=>btn.innerHTML=s,1400);});}
+function copyCode2(btn){const el=document.getElementById('qscode2');navigator.clipboard.writeText(el.innerText).then(()=>{const s=btn.innerHTML;btn.textContent='✓';setTimeout(()=>btn.innerHTML=s,1400);});}
+</script>
+</body>
+</html>
